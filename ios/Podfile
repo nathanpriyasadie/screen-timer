@@ -10,6 +10,8 @@ target 'duapuluhduapuluh' do
 
   pod 'RNSound', :path => '../node_modules/react-native-sound'
 
+  pod 'react-native-background-timer', :path => '../node_modules/react-native-background-timer'
+
   target 'duapuluhduapuluhTests' do
     inherit! :complete
     # Pods for testing

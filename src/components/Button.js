@@ -7,7 +7,7 @@ export default function Button({ text, containerStyle, onPress, ...props }) {
             style={[styles.buttonContainer, containerStyle]}
             onPress={() => {
                 onPress()
-                Vibration.vibrate(100)
+                // Vibration.vibrate(100)
             }}
             {...props}>
             <Text style={styles.text}>{text}</Text>

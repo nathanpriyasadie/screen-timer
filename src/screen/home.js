@@ -5,36 +5,46 @@ import {
     TouchableOpacity,
     StyleSheet,
     Vibration,
+    AppState,
 } from 'react-native';
 import BackgroundTask from 'react-native-background-task'
+import BackgroundTimer from "react-native-background-timer";
 import Clock from '../components/Clock';
 import Button from '../components/Button';
-import Sound from 'react-native-sound';
-import { WORK_TIME } from '../constant/time';
 import { getTime } from '../utils/time';
+import { gunSound } from '../utils/sound';
+import {
+    LocalNotification,
+    ScheduledLocalNotification
+} from '../services/LocalPushController'
+import { WORK_TIME } from '../constant/time';
+import { getAppState } from '../hooks/appState';
 
 export default function Home() {
+    const appState = getAppState()
     const [timeLeft, setTimeLeft] = useState(WORK_TIME);
     const [paused, setPaused] = useState(false)
     const [mode, setMode] = useState("work")
-    Sound.setCategory('Playback');
-    const gun = new Sound('gun.mp3', Sound.MAIN_BUNDLE, (error) => {
-        if (error) {
-            console.log('failed to load the sound', error);
-            return;
-        }
-    });
+
+    const handleButtonPress = () => {
+        LocalNotification()
+    }
 
     useEffect(() => {
-        const interval = setInterval(() => handleTimeChange(), 1000)
+        const intervalId = BackgroundTimer.setInterval(() => {
+            handleTimeChange()
+        }, 1000);
+
         return () => {
-            clearInterval(interval)
+            BackgroundTimer.clearInterval(intervalId)
         }
     })
+
 
     useEffect(() => {
         setTimeLeft(getTime(mode))
     }, [mode])
+
 
     function handleTimeChange() {
         if (timeLeft === 0) {
@@ -50,14 +60,15 @@ export default function Home() {
 
     function handleNextCycle() {
         setMode(mode === 'work' ? 'rest' : 'work')
-        gun.play()
-        console.log(mode)
+        gunSound.play()
+        appState === 'background' && LocalNotification()
     }
 
     return (
         <View style={[styles.container, { backgroundColor: paused ? 'yellow' : mode === 'work' ? 'lightgreen' : 'red' }]}>
             <Clock timeLeft={timeLeft} />
             <Text style={styles.modeText}>{paused ? 'PAUSED' : mode === 'work' ? 'WORK' : 'REST'}</Text>
+            <Text>{appState}</Text>
             <View style={styles.buttonsContainer}>
                 <Button text={paused ? "Continue" : 'Pause'}
                     onPress={() => setPaused(!paused)}

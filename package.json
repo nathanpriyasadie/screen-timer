@@ -13,6 +13,8 @@
     "react": "16.13.1",
     "react-native": "0.63.4",
     "react-native-background-task": "^0.2.1",
+    "react-native-background-timer": "^2.4.1",
+    "react-native-push-notification": "^7.0.0",
     "react-native-sound": "^0.11.0"
   },
   "devDependencies": {
