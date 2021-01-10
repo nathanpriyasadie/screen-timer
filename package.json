@@ -10,12 +10,17 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@fortawesome/react-native-fontawesome": "^0.2.6",
     "react": "16.13.1",
     "react-native": "0.63.4",
     "react-native-background-task": "^0.2.1",
     "react-native-background-timer": "^2.4.1",
+    "react-native-progress-circle": "^2.1.0",
     "react-native-push-notification": "^7.0.0",
-    "react-native-sound": "^0.11.0"
+    "react-native-sound": "^0.11.0",
+    "react-native-svg": "^12.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
@@ -29,5 +34,10 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts/"
+    ]
   }
 }

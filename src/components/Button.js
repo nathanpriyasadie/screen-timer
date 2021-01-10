@@ -1,28 +1,27 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, Vibration } from 'react-native'
 
-export default function Button({ text, containerStyle, onPress, ...props }) {
+export default function Button({ children, containerStyle, onPress, ...props }) {
     return (
         <TouchableOpacity
             style={[styles.buttonContainer, containerStyle]}
             onPress={() => {
                 onPress()
-                // Vibration.vibrate(100)
+                Vibration.vibrate(100)
             }}
             {...props}>
-            <Text style={styles.text}>{text}</Text>
+            {children}
         </TouchableOpacity>
     )
 }
 
 const styles = StyleSheet.create({
     buttonContainer: {
-        backgroundColor: 'blue',
         padding: 20,
         flex: 1,
-        width: '100%',
-        alignSelf: 'center',
-        alignContent: 'center',
+        height: 60,
+        width: 60,
+        alignItems: 'center',
         justifyContent: 'center',
     },
     text: {

@@ -16,11 +16,13 @@ export default function Clock({ timeLeft }) {
 
 const styles = StyleSheet.create({
     textContainer: {
-        fontSize: 100,
-        color: 'black'
+        fontSize: 40,
+        color: 'black',
+        fontFamily: 'Poppins-Regular',
+        marginBottom: -20
     },
     clockContainer: {
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     }
 })
